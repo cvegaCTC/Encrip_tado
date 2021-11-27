@@ -19,6 +19,7 @@ base64.push("/");
 function encriptar(elemento) {
 
     var palabra = document.getElementsByTagName("input")[0].value;
+console.log("palabra: " + palabra);
 
     var base64Frase = "";
 
@@ -31,6 +32,7 @@ function encriptar(elemento) {
             let asciiCode = subPalabra.charCodeAt(j);
             binString += ("0" + asciiCode.toString(2));  // 16 bytes
         }
+console.log("binString: " + binString);
 
         let bytes6 = "";
         let newAscii = "";
@@ -41,7 +43,12 @@ function encriptar(elemento) {
                 newAscii = parseInt(bytes6, 2);
                 newbase64 += base64[newAscii];
             }
+console.log("binString es divisible por 6");
+console.log("newbase64: " + newbase64);
         } else {
+
+console.log("binString NO es divisible por 6");
+
             for (let j = 0; j < Math.floor(binString / 6); j++) {
                 bytes6 = "00" + binString.slice(j, j + 6);
                 newAscii = parseInt(bytes6, 2);
@@ -58,6 +65,9 @@ function encriptar(elemento) {
             for (let l = 0; l < cerosDerecha; l += 2) {
                 newbase64 += "=";
             }
+
+console.log("newbase64: " + newbase64);
+
         }
         base64Frase += newbase64;
     }
